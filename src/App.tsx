@@ -47,7 +47,7 @@ export default function JobBoard() {
     setFilters(filters.filter((f) => f !== tag));
   };
 
-  const clearFilters = () => setFilters([]);
+  // const clearFilters = () => setFilters([]);
 
   const filterJobs = (job: Job): boolean => {
     const jobTags = [job.role, job.level, ...job.languages, ...job.tools];
