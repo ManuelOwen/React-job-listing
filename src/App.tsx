@@ -35,7 +35,9 @@ export default function JobBoard() {
       });
   }, []);
 
-  const allTags = Array.from(new Set(jobs.flatMap(job => [job.role, ...job.languages, ...job.tools])));
+  const allTags = Array.from(
+    new Set(jobs.flatMap((job) => [job.role, ...job.languages, ...job.tools]))
+  );
 
   const handleTagClick = (tag: string) => {
     if (!filters.includes(tag)) {
@@ -60,13 +62,15 @@ export default function JobBoard() {
     setSelectedRole(e.target.value);
   };
 
-  const roleFilteredJobs = selectedRole === 'all'
-    ? filteredJobs
-    : filteredJobs.filter(job =>
-        job.role === selectedRole ||
-        job.languages.includes(selectedRole) ||
-        job.tools.includes(selectedRole)
-      );
+  const roleFilteredJobs =
+    selectedRole === 'all'
+      ? filteredJobs
+      : filteredJobs.filter(
+          (job) =>
+            job.role === selectedRole ||
+            job.languages.includes(selectedRole) ||
+            job.tools.includes(selectedRole)
+        );
 
   return (
     <>
@@ -85,12 +89,12 @@ export default function JobBoard() {
         </svg>
       </div>
 
-      {/* Main Content */}
-      <div className="bg-[#effafa] -mt-12 md:-mt-20 px-4 py-12 md:px-24 space-y-8">
-        {/* Filter Bar (Always visible) */}
-        <div className="bg-white shadow-md rounded px-6 py-4 flex flex-col md:flex-row md:items-center md:justify-between gap-4 md:gap-0">
-          {/* Filter Tags */}
-          <div className="flex flex-wrap gap-4 min-h-[28px]">
+      {/* Main Section */}
+      <div className="bg-[#effafa] -mt-8 md:-mt-14 px-4 py-8 md:px-20 space-y-6">
+        {/* Filter Tag Bar - Always Visible */}
+        {/* <div className="bg-white shadow-md rounded px-4 py-3 flex flex-col md:flex-row md:items-center md:justify-between gap-3"> */}
+          {/* Tags */}
+          <div className="flex flex-wrap gap-3 min-h-[28px]">
             {filters.length > 0 ? (
               filters.map((filter) => (
                 <span
@@ -112,18 +116,26 @@ export default function JobBoard() {
           </div>
 
           {/* Clear Button */}
-          {/* <button
-            onClick={clearFilters}
-            className="text-gray-700 hover:underline text-sm whitespace-nowrap"
-            disabled={filters.length === 0}
-          >
-            Cl
-          </button>ear */}
+          <div className="text-right">
+            {/* <button
+              onClick={clearFilters}
+              disabled={filters.length === 0}
+              className={`text-sm font-medium underline ${
+                filters.length > 0
+                  ? 'text-teal-600 hover:text-teal-800'
+                  : 'text-gray-400 cursor-not-allowed'
+              }`}
+            >
+              Clear
+            </button> */}
+          </div>
         </div>
 
         {/* Role Filter Dropdown */}
-        <div className="mb-6">
-          <label htmlFor="role-filter" className="mr-2 font-bold">Filter by:</label>
+        <div className="mb-4">
+          <label htmlFor="role-filter" className="mr-2 font-bold">
+            Filter by:
+          </label>
           <select
             id="role-filter"
             value={selectedRole}
@@ -131,13 +143,15 @@ export default function JobBoard() {
             className="p-2 rounded border border-gray-300"
           >
             <option value="all">All</option>
-            {allTags.map(tag => (
-              <option key={tag} value={tag}>{tag}</option>
+            {allTags.map((tag) => (
+              <option key={tag} value={tag}>
+                {tag}
+              </option>
             ))}
           </select>
         </div>
 
-        {/* Loading Spinner */}
+        {/* Loader */}
         {loading ? (
           <div className="flex justify-center items-center h-40">
             <svg
@@ -219,7 +233,7 @@ export default function JobBoard() {
             ))}
           </>
         )}
-      </div>
+      {/* </div> */}
     </>
   );
 }
