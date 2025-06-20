@@ -49,7 +49,7 @@ export default function JobBoard() {
     setFilters(filters.filter((f) => f !== tag));
   };
 
-  // const clearFilters = () => setFilters([]);
+  const clearFilters = () => setFilters([]);
 
   const filterJobs = (job: Job): boolean => {
     const jobTags = [job.role, job.level, ...job.languages, ...job.tools];
@@ -91,9 +91,9 @@ export default function JobBoard() {
 
       {/* Main Section */}
       <div className="bg-[#effafa] -mt-8 md:-mt-14 px-4 py-8 md:px-20 space-y-6">
-        {/* Filter Tag Bar - Always Visible */}
-        {/* <div className="bg-white shadow-md rounded px-4 py-3 flex flex-col md:flex-row md:items-center md:justify-between gap-3"> */}
-          {/* Tags */}
+        {/* Filter Bar */}
+        <div className="bg-white shadow-md rounded px-4 py-3 flex flex-col md:flex-row md:items-center md:justify-between gap-3">
+          {/* Selected Tags */}
           <div className="flex flex-wrap gap-3 min-h-[28px]">
             {filters.length > 0 ? (
               filters.map((filter) => (
@@ -117,7 +117,7 @@ export default function JobBoard() {
 
           {/* Clear Button */}
           <div className="text-right">
-            {/* <button
+            <button
               onClick={clearFilters}
               disabled={filters.length === 0}
               className={`text-sm font-medium underline ${
@@ -127,11 +127,11 @@ export default function JobBoard() {
               }`}
             >
               Clear
-            </button> */}
+            </button>
           </div>
         </div>
 
-        {/* Role Filter Dropdown */}
+        {/* Dropdown */}
         <div className="mb-4">
           <label htmlFor="role-filter" className="mr-2 font-bold">
             Filter by:
@@ -181,7 +181,7 @@ export default function JobBoard() {
             {roleFilteredJobs.map((job) => (
               <div
                 key={job.id}
-                className={`bg-white p-6 rounded shadow-md flex flex-col md:flex-row items-start gap-4 border-l-4 ${
+                className={`bg-white p-6 rounded shadow-md hover:shadow-lg transition-shadow mt-5 flex flex-col md:flex-row items-start gap-4 border-l-4 ${
                   job.featured ? 'border-teal-500' : 'border-transparent'
                 }`}
               >
@@ -233,7 +233,7 @@ export default function JobBoard() {
             ))}
           </>
         )}
-      {/* </div> */}
+      </div>
     </>
   );
 }
